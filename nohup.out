@@ -1,0 +1,3 @@
+Health Check Attempt 1 - Success: true, Latency: 482.744827ms, MSG: Cloud check passed
+Health Check Attempt 2 - Success: true, Latency: 291.336913ms, MSG: Cloud check passed
+Health Check Attempt 3 - Success: true, Latency: 199.230914ms, MSG: Cloud check passed
