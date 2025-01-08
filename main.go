@@ -24,7 +24,7 @@ func main() {
 	checker.Timeout = 5 * time.Second
 
 	logOutput := log.Writer()
-	result := checker.CheckWithRetries(-1, 120*time.Second, logOutput)
+	result := checker.CheckWithRetries(-1, 10*time.Second, logOutput)
 
 	println("Result: ", result.Message)
 }

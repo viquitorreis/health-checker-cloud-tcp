@@ -160,6 +160,10 @@ func (hc *TCPChecker) performCloudCheck() *Result {
 	return &Result{Success: true, Message: "Cloud check passed"}
 }
 
+func GetSaoPauloTime() string {
+	return time.Now().In(time.FixedZone("SP", -3*60*60)).Format("2006-01-02 15:04:05.999999999")
+}
+
 func (hc *TCPChecker) CheckWithRetries(retries int, retryDelay time.Duration, logOutput io.Writer) *Result {
 	var result *Result
 	attempt := 0
@@ -170,7 +174,9 @@ func (hc *TCPChecker) CheckWithRetries(retries int, retryDelay time.Duration, lo
 		duration := time.Since(start)
 
 		attempt++
-		logOutput.Write([]byte(fmt.Sprintf("Health Check Attempt %d - Success: %v, Latency: %v, MSG: %s\n", attempt, result.Success, duration, result.Message)))
+		if !result.Success {
+			logOutput.Write([]byte(fmt.Sprintf("Time: %s, Health Check Attempt %d - Success: %v, Latency: %v, MSG: %s\n", GetSaoPauloTime(), attempt, result.Success, duration, result.Message)))
+		}
 
 		// if result.Success {
 		// 	return result
